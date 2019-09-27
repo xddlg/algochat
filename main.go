@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	chatAddr       = flag.String("chataddr", "KPLD4GPZYXST7S2ALYSAVRCBWYBCUQCN6T4N6HAYCHCP4GOV7KWJUGITBE", "algod.net address of chat server node")
+	chatAddr       = flag.String("chataddr", "KPLD4GPZYXST7S2ALYSAVRCBWYBCUQCN6T4N6HAYCHCP4GOV7KWJUGITBE", "wallet address of chat server node")
 	algodAddress   = flag.String("algodaddress", "http://localhost:8080", "algod.net address")
 	algodToken     = flag.String("algodtoken", "", "algod.token value")
 	kmdAddress     = flag.String("kmdaddress", "http://localhost:7833", "kmd.net address")
