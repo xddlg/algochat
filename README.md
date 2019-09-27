@@ -72,6 +72,7 @@ EOF
 >See usage, above.
 12. When done, stop kmd and the network.
 >goal network stop -r _path-to-your-network_
+
 >goal kmd stop -d _path-to-your-network_/_chat-client-node_
 
 ### Running the App on TestNet
