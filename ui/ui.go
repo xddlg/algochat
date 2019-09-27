@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/jroimartin/gocui"
-	"github.com/jsign/algochat/algochat"
+	"github.com/xddlg/algochat/algochat"
 	"github.com/pkg/errors"
 )
 

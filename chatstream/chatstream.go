@@ -11,13 +11,11 @@ import (
 	"github.com/algorand/go-algorand-sdk/client/algod"
 	"github.com/algorand/go-algorand-sdk/client/kmd"
 	"github.com/algorand/go-algorand-sdk/transaction"
-	"github.com/jsign/algochat/algochat"
+	"github.com/xddlg/algochat/algochat"
 	"github.com/pkg/errors"
 )
 
 const (
-	chatAddr = "KPLD4GPZYXST7S2ALYSAVRCBWYBCUQCN6T4N6HAYCHCP4GOV7KWJUGITBE"
-
 	// Initial intention:
 	// avgSecPerBlock     = 6 // approx
 	// blocksPerDay       = 60 * 60 * 24 / avgSecPerBlock
@@ -40,6 +38,8 @@ type AlgoChatStream struct {
 	walletID       string
 	username       string
 
+	chatAddr       string
+
 	mux         sync.Mutex // guards everything below
 	inited      bool
 	running     bool
@@ -61,13 +61,15 @@ func NewChatStream(walletName, walletPassword, fromAddr, username string) *AlgoC
 	return ams
 }
 
-// Init creates the algod and kmd client for interaction
-func (ams *AlgoChatStream) Init(algodAddress, algodToken, kmdAddress, kmdToken string) error {
+// Init creates the algod and kmd client for interaction with node chatAddr
+func (ams *AlgoChatStream) Init(chatAddr, algodAddress, algodToken, kmdAddress, kmdToken string) error {
 	ams.mux.Lock()
 	defer ams.mux.Unlock()
 	if ams.inited {
 		return nil
 	}
+
+	ams.chatAddr = chatAddr
 
 	algodClient, err := algod.MakeClient(algodAddress, algodToken)
 	if err != nil {
@@ -144,7 +146,7 @@ func (ams *AlgoChatStream) sendMessagesInTrx(msg string) error {
 		return errors.Wrap(err, "couldn't marshal msg")
 	}
 
-	tx, err := transaction.MakePaymentTxn(ams.fromAddr, chatAddr, txParams.Fee, 0, txParams.LastRound, txParams.LastRound+100, msgBytes, "", txParams.GenesisID, txParams.GenesisHash)
+	tx, err := transaction.MakePaymentTxn(ams.fromAddr, ams.chatAddr, txParams.Fee, 0, txParams.LastRound, txParams.LastRound+100, msgBytes, "", txParams.GenesisID, txParams.GenesisHash)
 	if err != nil {
 		return errors.Wrap(err, "error creating the transaction")
 	}
@@ -214,7 +216,7 @@ func (ams *AlgoChatStream) listenNewMessages() {
 		}
 
 		for _, t := range b.Transactions.Transactions {
-			if strings.Compare(t.Payment.To, chatAddr) == 0 {
+			if ( (t.Payment != nil) && (strings.Compare(t.Payment.To, ams.chatAddr) == 0) ) {
 				message := &algochat.ChatMessage{}
 				err = json.Unmarshal(t.Note, message)
 				if err != nil {

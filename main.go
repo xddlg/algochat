@@ -4,11 +4,12 @@ import (
 	"flag"
 	"log"
 
-	"github.com/jsign/algochat/chatstream"
-	"github.com/jsign/algochat/ui"
+	"github.com/xddlg/algochat/chatstream"
+	"github.com/xddlg/algochat/ui"
 )
 
 var (
+	chatAddr       = flag.String("chataddr", "KPLD4GPZYXST7S2ALYSAVRCBWYBCUQCN6T4N6HAYCHCP4GOV7KWJUGITBE", "algod.net address of chat server node")
 	algodAddress   = flag.String("algodaddress", "http://localhost:8080", "algod.net address")
 	algodToken     = flag.String("algodtoken", "", "algod.token value")
 	kmdAddress     = flag.String("kmdaddress", "http://localhost:7833", "kmd.net address")
@@ -23,7 +24,7 @@ func main() {
 	flag.Parse()
 	ams := chatstream.NewChatStream(*walletName, *walletPassword, *fromAddr, *username)
 
-	if err := ams.Init(*algodAddress, *algodToken, *kmdAddress, *kmdToken); err != nil {
+	if err := ams.Init(*chatAddr, *algodAddress, *algodToken, *kmdAddress, *kmdToken); err != nil {
 		log.Fatalf("%v\n", err)
 	}
 	if err := ams.Run(); err != nil {
