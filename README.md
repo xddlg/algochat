@@ -68,8 +68,7 @@ EOF
 9. Start kmd for the chat client node
 >goal kmd start -d _path-to-your-network_/_chat-client-node_
 10. Get the network addresses from _path-to-your-network_/_chat-client-node_
-11. Start the algochat for the chat client node
->See usage, above.
+11. Start the algochat for the chat client node. See usage, above.
 12. When done, stop kmd and the network.
 >goal network stop -r _path-to-your-network_
 
