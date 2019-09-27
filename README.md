@@ -70,7 +70,7 @@ EOF
 10. Get the network addresses from <path-to-your-network>/<chat-client-node>
 11. Start the algochat for the chat client node
 >go run main.go -chataddr <chat-node-wallet-addr> -algodaddress <client-node-algod-net-address> -algodtoken <client-node-algod-token> -kmdaddress <client-node-kmd-net-address> -kmdtoken <client-node-kmd-token> -wallet <client-node-wallet-name> -walletpassword <client-node-wallet-password> -from <client-node-wallet-addr> -username <client-node-username>
-12. When done, stop kmd the network.
+12. When done, stop kmd and the network.
 >goal network stop -r <path-to-your-network>
 >goal kmd stop -d <path-to-your-network>/<chat-client-node>
 
