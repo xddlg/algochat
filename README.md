@@ -62,22 +62,22 @@ EOF
 6. Navigate inside the folder above, i.e. ```cd $GOPATH/src/github.com/xddlg/algochat```
 
 ### Running the App on Private Local Network
-7. Set up a private local network with at least two nodes. One as the chat node and another as the chat client node. Follow https://developer.algorand.org/docs/creating-private-network instructions all the way to _Creating a New Account and a Participation Key_. Identify the node that will be used the chat node and the one that will be the chat client node. Keep wallet addresses, names, passwords and node tokens handy.
+7. Set up a private local network with at least two nodes. One as the chat node and another as the chat client node. Follow https://developer.algorand.org/docs/creating-private-network instructions all the way to _Creating a New Account and a Participation Key_. Identify the node that will be used as the chat node and the one that will be the chat client node. Keep wallet addresses, names, passwords and node tokens handy.
 8. Start your network, which starts the nodes
->goal network start -r <path-to-your-network>
+>goal network start -r _path-to-your-network_
 9. Start kmd for the chat client node
->goal kmd start -d <path-to-your-network>/<chat-client-node>
-10. Get the network addresses from <path-to-your-network>/<chat-client-node>
+>goal kmd start -d _path-to-your-network_/_chat-client-node_
+10. Get the network addresses from _path-to-your-network_/_chat-client-node_
 11. Start the algochat for the chat client node
->go run main.go -chataddr <chat-node-wallet-addr> -algodaddress <client-node-algod-net-address> -algodtoken <client-node-algod-token> -kmdaddress <client-node-kmd-net-address> -kmdtoken <client-node-kmd-token> -wallet <client-node-wallet-name> -walletpassword <client-node-wallet-password> -from <client-node-wallet-addr> -username <client-node-username>
+>See usage, above.
 12. When done, stop kmd and the network.
->goal network stop -r <path-to-your-network>
->goal kmd stop -d <path-to-your-network>/<chat-client-node>
+>goal network stop -r _path-to-your-network_
+>goal kmd stop -d _path-to-your-network_/_chat-client-node_
 
 ### Running the App on TestNet
 13. Make sure you start ```kmd``` as it's not started by default on the node (`goal kmd start`)
 14. If using default config values, launch the AlgoChat app
->go run main.go -wallet <name of your wallet> -from your-account-address -algodaddress http://192.168.1.1:8080 -algodtoken your-algod-token -kmdtoken your-kmd-token -kmdaddress http://192.168.1.1:7833 -username Guest
+>go run main.go -wallet name-of-your-wallet -from your-account-address -algodaddress http://192.168.1.1:8080 -algodtoken your-algod-token -kmdtoken your-kmd-token -kmdaddress http://192.168.1.1:7833 -username Guest
 15. If using Windows and have an SSH client (e.g. Putty, SecureCRT), to display properly AlgoChat, you need in the appearance settings of the client to set character encoding to ```UTF-8```
 
 Thanks to [nikandriko](https://github.com/nikandriko) for elaborating the above step-by-step instructions.
