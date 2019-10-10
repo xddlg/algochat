@@ -136,7 +136,7 @@ func readInChan(g *gocui.Gui, in <-chan *algochat.ChatMessage) {
 		select {
 		case m := <-in:
 			g.Update(func(g *gocui.Gui) error {
-				_, _ = fmt.Fprintf(mv, "<%v-%v>: %v\n", m.Addr, m.Username, m.Message)
+				_, _ = fmt.Fprintf(mv, "<%v-%v(%v)>: %v\n", m.Addr, m.Username, m.Reputation, m.Message)
 				return nil
 			})
 		}

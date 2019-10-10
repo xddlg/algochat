@@ -74,6 +74,11 @@ type Account struct {
 	// required: true
 	Amount uint64 `json:"amount"`
 
+
+	// Reputation value, if exists
+	// required: false
+	Reputation uint64 `json:"reputation"`
+
 	// PendingRewards specifies the amount of MicroAlgos of pending
 	// rewards in this account.
 	//

@@ -224,6 +224,13 @@ func (ams *AlgoChatStream) listenNewMessages() {
 				}
 				message.Addr = t.From[:5]
 
+				ai, err := ams.algodClient.AccountInformation(t.From)
+				if (err != nil) {
+					message.Reputation = "N/A"
+				} else {
+					message.Reputation = fmt.Sprintf("%v", ai.Reputation)
+				}
+
 				ams.in <- message
 			}
 		}
