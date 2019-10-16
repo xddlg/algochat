@@ -11,13 +11,13 @@ At the current moment, it works in the TestNet if no chat node wallet address is
 $ go run main.go -h
 Usage of main:
   -chataddr string
-        the addr of the default account of the node that serves as chat node (default "KPLD4GPZYXST7S2ALYSAVRCBWYBCUQCN6T4N6HAYCHCP4GOV7KWJUGITBE" on the TestNet)
+        the addr of the online account of the default wallet of node that serves as chat node (default "KPLD4GPZYXST7S2ALYSAVRCBWYBCUQCN6T4N6HAYCHCP4GOV7KWJUGITBE" on the TestNet)
   -algodaddress string
         algod.net address of chat client node (default "http://localhost:8080")
   -algodtoken string
         algod.token value of chat client node
   -from string
-        the addr of the default account of the client node (the node from which you will pay the txn fees)
+        the addr of the online account of the default wallet of the client node (the node from which you will pay the txn fees)
   -kmdaddress string
         kmd.net address of chat client node (default "http://localhost:7833")
   -kmdtoken string
@@ -32,7 +32,7 @@ Usage of main:
 
 Usage:
 ```
-$ go run main.go -chataddr <chat-node-wallet-addr> -algodaddress <client-node-algod-net-address> -algodtoken <client-node-algod-token> -kmdaddress <client-node-kmd-net-address> -kmdtoken <client-node-kmd-token> -wallet <client-node-wallet-name> -walletpassword <client-node-wallet-password> -from <client-node-wallet-addr> -username <client-node-username>
+$ go run main.go -chataddr <chat-node-account-addr> -algodaddress <client-node-algod-net-address> -algodtoken <client-node-algod-token> -kmdaddress <client-node-kmd-net-address> -kmdtoken <client-node-kmd-token> -wallet <client-node-wallet-name> -walletpassword <client-node-wallet-password> -from <client-node-account-addr> -username <client-node-username>
 
 ```
 
