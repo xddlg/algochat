@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"strings"
+	"strconv"
 	"sync"
 	"time"
 
@@ -196,9 +197,10 @@ func (ams *AlgoChatStream) listenNewMessages() {
 		panic("error while getting node status")
 	}
 
-	blockNum := status.LastRound - initialBlockOffset
-	if blockNum < 1 {
-		blockNum = 1
+	var blockNum uint64 = 1
+	// the last 1000 (should it be less for us?)
+	if(status.LastRound > initialBlockOffset) {
+		blockNum = status.LastRound - initialBlockOffset
 	}
 
 	for {
@@ -223,7 +225,7 @@ func (ams *AlgoChatStream) listenNewMessages() {
 					continue
 				}
 				message.Addr = t.From[:5]
-
+				message.Round = strconv.FormatUint(blockNum, 10)
 				ai, err := ams.algodClient.AccountInformation(t.From)
 				if (err != nil) {
 					message.Reputation = "N/A"
